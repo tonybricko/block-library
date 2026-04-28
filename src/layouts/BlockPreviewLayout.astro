@@ -158,6 +158,14 @@ const fullTitle = `${category} — ${title}`;
       sourceToggle.addEventListener('click', toggleDrawer);
       closeDrawer.addEventListener('click', toggleDrawer);
 
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+          try {
+            iframe.contentDocument.dispatchEvent(new KeyboardEvent('keydown', { key: e.key, bubbles: true }));
+          } catch(e) {}
+        }
+      });
+
       copyBtn.addEventListener('click', function() {
         navigator.clipboard.writeText(componentSource).then(function() {
           copyBtn.textContent = 'Copied!';

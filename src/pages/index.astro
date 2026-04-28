@@ -4,6 +4,7 @@ import Layout from "@/layouts/Layout.astro";
 const blocks: { category: string; slug: string; name: string }[] = [
   { category: "Hero", slug: "hero-card-fan", name: "Card Fan" },
   { category: "CTA", slug: "cta-email-register", name: "Email Register" },
+  { category: "Testimonials", slug: "testimonials-with-rating", name: "With Rating" },
 ];
 
 const grouped = blocks.reduce<Record<string, typeof blocks>>(
