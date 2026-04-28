@@ -1,0 +1,7 @@
+---
+import { readFileSync } from 'fs';
+import BlockPreviewLayout from "@/layouts/BlockPreviewLayout.astro";
+const source = readFileSync('src/components/blocks/cta/CtaEmailRegister.astro', 'utf-8');
+---
+
+<BlockPreviewLayout title="Email Register" category="CTA" iframeSrc="/embed/cta-email-register" source={source} />

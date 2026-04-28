@@ -1,0 +1,101 @@
+---
+interface Props {
+  headline?: string;
+  buttonText?: string;
+  emailPlaceholder?: string;
+  termsHref?: string;
+  termsText?: string;
+  /**
+   * Up to 5 avatar image URLs. Shows placeholder circles if omitted.
+   */
+  avatars?: string[];
+  formAction?: string;
+  formMethod?: "get" | "post";
+}
+
+const {
+  headline = "Lorem ipsum dolor sit amet, consectetur adipiscing.",
+  buttonText = "Register",
+  emailPlaceholder = "Your Email",
+  termsHref = "#",
+  termsText = "By clicking Register, you acknowledge that you have read and accepted our",
+  avatars = [],
+  formAction = "#",
+  formMethod = "post",
+} = Astro.props;
+
+const avatarSlots = Array.from({ length: 5 }, (_, i) => avatars[i] ?? null);
+---
+
+<section class="bg-white px-4 py-6 sm:px-6 sm:py-8">
+  <div class="rounded-3xl bg-neutral-100 px-8 py-14 text-center sm:px-14 sm:py-16 lg:px-20 lg:py-20">
+
+    <!-- Avatar row -->
+    <div class="flex items-center justify-center">
+      {avatarSlots.map((src, i) => (
+        <div
+          class:list={[
+            "flex items-center justify-center rounded-full bg-neutral-200 ring-2 ring-neutral-100 overflow-hidden",
+            "size-11 sm:size-12 lg:size-14",
+            i > 0 ? "-ml-3 lg:-ml-4" : "",
+          ]}
+        >
+          {src
+            ? <img src={src} alt="" class="h-full w-full object-cover" />
+            : <svg
+                class="size-4 sm:size-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#a3a3a3"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                <circle cx="8.5" cy="8.5" r="1.5"/>
+                <polyline points="21 15 16 10 5 21"/>
+              </svg>
+          }
+        </div>
+      ))}
+    </div>
+
+    <!-- Headline -->
+    <h2 class="mt-6 text-4xl font-bold leading-[1.1] tracking-tight text-neutral-950 sm:text-5xl lg:text-6xl">
+      {headline}
+    </h2>
+
+    <!-- Email form -->
+    <form
+      action={formAction}
+      method={formMethod}
+      class="mx-auto mt-8 max-w-2xl sm:mt-10"
+    >
+      <div class="flex flex-col gap-3 sm:flex-row">
+        <input
+          type="email"
+          name="email"
+          required
+          placeholder={emailPlaceholder}
+          aria-label="Email address"
+          class="flex-1 rounded-md border border-neutral-300 bg-white px-5 py-4 text-sm text-neutral-900 placeholder:text-neutral-400 outline-none focus:border-neutral-500 focus:ring-2 focus:ring-neutral-200"
+        />
+        <button
+          type="submit"
+          class="rounded-md bg-neutral-950 px-8 py-4 text-sm font-semibold text-white transition-colors hover:bg-neutral-800"
+        >
+          {buttonText}
+        </button>
+      </div>
+
+      <p class="mt-4 text-left text-sm leading-relaxed text-neutral-500">
+        {termsText}{" "}
+        <a href={termsHref} class="font-bold text-neutral-900 hover:underline">
+          Terms and Conditions
+        </a>.
+      </p>
+    </form>
+
+  </div>
+</section>

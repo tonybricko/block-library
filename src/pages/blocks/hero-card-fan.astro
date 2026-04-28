@@ -1,0 +1,7 @@
+---
+import { readFileSync } from 'fs';
+import BlockPreviewLayout from "@/layouts/BlockPreviewLayout.astro";
+const source = readFileSync('src/components/blocks/hero/HeroCardFan.astro', 'utf-8');
+---
+
+<BlockPreviewLayout title="Card Fan" category="Hero" iframeSrc="/embed/hero-card-fan" source={source} />
