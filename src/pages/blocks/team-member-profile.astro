@@ -1,0 +1,12 @@
+---
+import { readFileSync } from "fs";
+import BlockPreviewLayout from "@/layouts/BlockPreviewLayout.astro";
+const source = readFileSync("src/components/blocks/team/TeamMemberProfile.astro", "utf-8");
+---
+
+<BlockPreviewLayout
+  title="Member Profile"
+  category="Team"
+  iframeSrc="/embed/team-member-profile"
+  source={source}
+/>
